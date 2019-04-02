@@ -1,23 +1,4 @@
-// We first need to listen for the scroll event on the page
-// Next, when our browser reaches a certain distance form the top of the page we need to change the body elements background color
-
-$(document).on("scroll", function() {
-  // console.log("Page Scrolled")
-
-  var d = $(document).scrollTop();
-  console.log(d);
-
-  if(d > 1000) {
-    console.log("past 1000 pixels");
-    $('body').addClass('brogue-active');
-  }
-  else {
-    console.log("less than 1000 pixels down");
-    $('body').removeClass('brogue-active');
-  }
-
-  $('body').toggleClass('stationary-active', d > 4400);
-});
+/*jshint esversion: 6 */
 
 // Lightbox functionality
 // the first step we want to do is to show our lightbox when we click on an image
@@ -27,10 +8,41 @@ $(document).on("scroll", function() {
 $('.brogues img, .stationary img').on('click', function() {
   $('.lightbox').fadeIn();
 
-  var imageSrc = $(this).attr('src');
+  let imageSrc = $(this).attr('src');
   $('.lightbox img').attr('src', imageSrc);
 });
 
 $('.lightbox').on('click', function() {
   $('.lightbox').fadeOut();
+});
+
+// We first need to listen for the scroll event on the page
+// Next, when our browser reaches a certain distance form the top of the page we need to change the body elements background color
+
+const body = document.querySelector("body");
+
+// Listen out for scroll events on our page
+document.addEventListener("scroll", function() {
+  //console.log("Page scrolled");
+
+  // Find out and store how far from the top of the page the scrollbar is
+  let distanceFromTop = window.scrollY;
+  console.log(distanceFromTop);
+
+  // If distanceFromTop is greater than 1000 pixels, do something
+  if (distanceFromTop > 1000) {
+    console.log("past 1000 pixels");
+    body.classList.add("brogue-active");
+  } else {
+    // Otherwise do something else
+    console.log("less than 1000 pixels down");
+    body.classList.remove("brogue-active");
+  }
+
+  if (distanceFromTop > 4400) {
+    body.classList.add("stationary-active");
+  } else {
+    body.classList.remove("stationary-active");
+  }
+
 });
