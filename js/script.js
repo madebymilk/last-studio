@@ -5,15 +5,26 @@
 // we want to make sure that the image we clicked on will be in the lightbox
 // we want to make sure that when we click on the lightbox when its visible that it will fade out and hide itself again
 
-$('.brogues img, .stationary img').on('click', function() {
-  $('.lightbox').fadeIn();
+const images = document.querySelectorAll("section img");
+const lightbox = document.querySelector(".lightbox");
+const lightboxImage = document.querySelector(".lightbox img");
 
-  let imageSrc = $(this).attr('src');
-  $('.lightbox img').attr('src', imageSrc);
+console.log(images);
+
+images.forEach(image => {
+
+  image.addEventListener("click", function() {
+
+    lightbox.classList.add("fadeIn");
+    let imageSrc = this.getAttribute("src");
+    lightboxImage.setAttribute("src", imageSrc);
+
+  });
+
 });
 
-$('.lightbox').on('click', function() {
-  $('.lightbox').fadeOut();
+lightbox.addEventListener("click", function() {
+  lightbox.classList.remove("fadeIn");
 });
 
 // We first need to listen for the scroll event on the page
